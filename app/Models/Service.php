@@ -16,4 +16,9 @@ class Service extends Model
         'duration',
         'price',
     ];
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }

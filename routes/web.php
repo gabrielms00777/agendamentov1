@@ -10,6 +10,7 @@ use App\Livewire\{
     Admin\Clients\Index as AdminClients,
     Admin\Products\Index as AdminProducts,
     Admin\Reports\Index as AdminReports,
+    Admin\Agenda\Index as AdminAgenda,
     Receptionist\Dashboard\Index as ReceptionistDashboard,
     Receptionist\Appointments\Index as ReceptionistAppointments,
     Receptionist\Clients\Index as ReceptionistClients,
@@ -20,18 +21,16 @@ use App\Livewire\{
     Client\Home\Index as ClientHome,
     Client\Scheduling\Index as ClientScheduling,
     Client\Appointments\Index as ClientAppointments,
-    Client\Loyalty\Index as ClientLoyalty
+    Client\Loyalty\Index as ClientLoyalty,
+    Auth\Login as Login
 };
 
-auth()->loginUsingId(1);
+auth()->loginUsingId(2);
 
 Route::get('/', ClientHome::class)->name('home');
 Route::get('/agendamento', ClientScheduling::class)->name('scheduling');
 
-// Route::middleware('guest')->group(function () {
-//     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-//     Route::post('/login', [LoginController::class, 'login']);
-// });
+Route::get('/login', Login::class)->name('login');
 
 Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->middleware(['role:' . UserRoleEnum::ADMIN->value])->group(function () {
@@ -42,6 +41,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/clientes', AdminClients::class)->name('clients.index');
         Route::get('/produtos', AdminProducts::class)->name('products.index');
         Route::get('/relatorios', AdminReports::class)->name('reports.index');
+        Route::get('/agenda', AdminAgenda::class)->name('agenda.index');
     });
 
     Route::prefix('receptionist')->name('receptionist.')->middleware(['role:' . UserRoleEnum::RECEPTIONIST->value])->group(function () {

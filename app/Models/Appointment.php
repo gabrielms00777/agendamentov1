@@ -24,6 +24,22 @@ class Appointment extends Model
     {
         return [
             'status' => AppointmentStatusEnum::class,
+            'date_time' => 'datetime',
         ];
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function professional()
+    {
+        return $this->belongsTo(Professional::class);
     }
 }
