@@ -6,6 +6,7 @@ use App\Livewire\{
     Admin\Dashboard\Index as AdminDashboard,
     Admin\Appointments\Index as AdminAppointments,
     Admin\Services\Index as AdminServices,
+    Admin\Services\Create as AdminServicesCreate,
     Admin\Professionals\Index as AdminProfessionals,
     Admin\Clients\Index as AdminClients,
     Admin\Products\Index as AdminProducts,
@@ -25,7 +26,7 @@ use App\Livewire\{
     Auth\Login as Login
 };
 
-auth()->loginUsingId(2);
+auth()->loginUsingId(1);
 
 Route::get('/', ClientHome::class)->name('home');
 Route::get('/agendamento', ClientScheduling::class)->name('scheduling');
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', AdminDashboard::class)->name('dashboard');
         Route::get('/agendamentos', AdminAppointments::class)->name('appointments.index');
         Route::get('/servicos', AdminServices::class)->name('services.index');
+        Route::get('/servicos/cadastro', AdminServicesCreate::class)->name('services.create');
         Route::get('/profissionais', AdminProfessionals::class)->name('professionals.index');
         Route::get('/clientes', AdminClients::class)->name('clients.index');
         Route::get('/produtos', AdminProducts::class)->name('products.index');

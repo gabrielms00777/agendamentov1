@@ -3,9 +3,11 @@
 namespace App\Livewire\Admin\Services;
 
 use App\Models\Service;
+use Livewire\Attributes\Computed;
 use Livewire\Component;
-use Livewire\Attributes\Layout;
 use Livewire\WithPagination;
+use Livewire\Attributes\Layout;
+use Livewire\Attributes\On;
 
 #[Layout('layouts.admin')]
 class Index extends Component
@@ -19,26 +21,21 @@ class Index extends Component
         'price_max' => null,
     ];
 
+    #[On('service-created')]
+    #[Computed()]
+    public function services()
+    {
+        return Service::query()
+                ->when($this->filters['name'], fn ($query, $name) => $query->where('name', 'like', '%' . $name . '%'))
+                ->when($this->filters['price_min'], fn ($query, $price) => $query->where('price', '>=', $price))
+                ->when($this->filters['price_max'], fn ($query, $price) => $query->where('price', '<=', $price))
+                ->latest()
+                ->paginate(10);
+    }
+
     public function render()
     {
-        // Consulta base
-        $query = Service::query();
-
-        // Aplicar filtros
-        if ($this->filters['name']) {
-            $query->where('name', 'like', '%' . $this->filters['name'] . '%');
-        }
-        if ($this->filters['price_min']) {
-            $query->where('price', '>=', $this->filters['price_min']);
-        }
-        if ($this->filters['price_max']) {
-            $query->where('price', '<=', $this->filters['price_max']);
-        }
-
-        // Paginação
-        $services = $query->paginate(10);
-
-        return view('livewire.admin.services.index', compact('services'));
+        return view('livewire.admin.services.index');
     }
 
     public function toggleFilters()

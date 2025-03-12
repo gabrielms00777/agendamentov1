@@ -204,14 +204,14 @@
 
     <!-- Sidebar -->
     <div id="hs-application-sidebar" class="hs-overlay  [--auto-close:lg]
-  hs-overlay-open:translate-x-0
-  -translate-x-full transition-all duration-300 transform
-  w-65 h-full
-  hidden
-  fixed inset-y-0 start-0 z-60
-  bg-white border-e border-gray-200
-  lg:block lg:translate-x-0 lg:end-auto lg:bottom-0
-  dark:bg-neutral-800 dark:border-neutral-700" role="dialog" tabindex="-1" aria-label="Sidebar">
+            hs-overlay-open:translate-x-0
+            -translate-x-full transition-all duration-300 transform
+            w-65 h-full
+            hidden
+            fixed inset-y-0 start-0 z-60
+            bg-white border-e border-gray-200
+            lg:block lg:translate-x-0 lg:end-auto lg:bottom-0
+            dark:bg-neutral-800 dark:border-neutral-700" role="dialog" tabindex="-1" aria-label="Sidebar">
         <div class="relative flex flex-col h-full max-h-full">
             <div class="px-6 pt-4 flex items-center">
                 <!-- Logo -->
@@ -308,6 +308,7 @@
     <div class="w-full lg:ps-64">
         <div class="p-4 sm:p-6 space-y-4 sm:space-y-6">
             {{$slot}}
+            
         </div>
     </div>
     <!-- End Content -->
